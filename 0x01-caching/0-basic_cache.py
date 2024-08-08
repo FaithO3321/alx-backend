@@ -1,5 +1,10 @@
 #!/usr/bin/python3
+"""
+    Function that creates a class
+"""
+
 from base_caching import BaseCaching
+
 
 class BasicCache(BaseCaching):
     """
