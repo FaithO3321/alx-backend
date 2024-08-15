@@ -24,9 +24,14 @@ babel = Babel(app)
 @babel.localeselector
 def get_locale():
     """
-    Determine the best match for supported languages.
+    Determine the best match for supported languages
+    or force a specific locale if specified.
     """
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
+    else:
+        return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
@@ -34,7 +39,7 @@ def index():
     """
     Index route that renders the welcome page with translated text
     """
-    return render_template('3-index.html',
+    return render_template('4-index.html',
                            title=gettext('home_title'),
                            header=gettext('home_header'))
 
